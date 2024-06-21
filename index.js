@@ -4,6 +4,8 @@ const cors = require('cors')
 const multer = require('multer');
 const multipart = multer();
 
+const uri = process.env.MONGODB_URI;
+
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -15,6 +17,10 @@ app.use(cors())
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.get("/uri_mongo", (req, res) => {
+    res.send(uri);
+});
 
 app.get("/", (req, res) => {
     res.send("Hello! Node.js");
